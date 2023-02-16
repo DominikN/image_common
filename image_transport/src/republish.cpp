@@ -62,15 +62,15 @@ int main(int argc, char ** argv)
   if (vargv.size() < 3) {
     // Use all available transports for output
     rclcpp::PublisherOptions pub_options;
-    auto qos_override_options = rclcpp::QosOverridingOptions(
-    {
-      rclcpp::QosPolicyKind::Depth,
-      rclcpp::QosPolicyKind::Durability,
-      rclcpp::QosPolicyKind::History,
-      rclcpp::QosPolicyKind::Reliability,
-    });
+    // auto qos_override_options = rclcpp::QosOverridingOptions(
+    // {
+    //   rclcpp::QosPolicyKind::Depth,
+    //   rclcpp::QosPolicyKind::Durability,
+    //   rclcpp::QosPolicyKind::History,
+    //   rclcpp::QosPolicyKind::Reliability,
+    // });
 
-    pub_options.qos_overriding_options = qos_override_options;
+    pub_options.qos_overriding_options =  rclcpp::QosOverridingOptions::with_default_policies();
     auto pub = image_transport::create_publisher(
       node.get(), out_topic,
       rmw_qos_profile_default, pub_options);
@@ -81,7 +81,7 @@ int main(int argc, char ** argv)
     PublishMemFn pub_mem_fn = &image_transport::Publisher::publish;
 
     rclcpp::SubscriptionOptions sub_options;
-    sub_options.qos_overriding_options = qos_override_options;
+    sub_options.qos_overriding_options =  rclcpp::QosOverridingOptions::with_default_policies();
 
     auto sub = image_transport::create_subscription(
       node.get(), in_topic, std::bind(pub_mem_fn, &pub, std::placeholders::_1),
