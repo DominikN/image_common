@@ -53,7 +53,7 @@ IMAGE_TRANSPORT_PUBLIC
 Publisher create_publisher(
   rclcpp::Node * node,
   const std::string & base_topic,
-  rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
+  rmw_qos_profile_t custom_qos = rmw_qos_profile_sensor_data,
   rclcpp::PublisherOptions options = rclcpp::PublisherOptions());
 
 /**
@@ -65,7 +65,7 @@ Subscriber create_subscription(
   const std::string & base_topic,
   const Subscriber::Callback & callback,
   const std::string & transport,
-  rmw_qos_profile_t custom_qos = rmw_qos_profile_default,
+  rmw_qos_profile_t custom_qos = rmw_qos_profile_sensor_data,
   rclcpp::SubscriptionOptions options = rclcpp::SubscriptionOptions());
 
 /*!
@@ -75,7 +75,7 @@ IMAGE_TRANSPORT_PUBLIC
 CameraPublisher create_camera_publisher(
   rclcpp::Node * node,
   const std::string & base_topic,
-  rmw_qos_profile_t custom_qos = rmw_qos_profile_default);
+  rmw_qos_profile_t custom_qos = rmw_qos_profile_sensor_data);
 
 /*!
  * \brief Subscribe to a camera, free function version.
@@ -86,7 +86,7 @@ CameraSubscriber create_camera_subscription(
   const std::string & base_topic,
   const CameraSubscriber::Callback & callback,
   const std::string & transport,
-  rmw_qos_profile_t custom_qos = rmw_qos_profile_default);
+  rmw_qos_profile_t custom_qos = rmw_qos_profile_sensor_data);
 
 IMAGE_TRANSPORT_PUBLIC
 std::vector<std::string> getDeclaredTransports();
